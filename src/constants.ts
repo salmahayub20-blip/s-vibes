@@ -1,0 +1,220 @@
+import { MoodPreset, MoodId, Vibe, Capsule, Reflection, AppSettings } from "./types";
+
+export const MOOD_PRESETS: MoodPreset[] = [
+  {
+    id: "cosmic",
+    label: "Cosmic",
+    color: "#6366f1",
+    gradient: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
+    glow: "rgba(99,102,241,0.5)",
+    bgDark: "radial-gradient(ellipse at 20% 50%, rgba(99,102,241,0.18) 0%, transparent 60%)",
+    bgLight: "radial-gradient(ellipse at 20% 50%, rgba(99,102,241,0.08) 0%, transparent 60%)",
+  },
+  {
+    id: "serene",
+    label: "Serene",
+    color: "#14b8a6",
+    gradient: "linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%)",
+    glow: "rgba(20,184,166,0.5)",
+    bgDark: "radial-gradient(ellipse at 80% 20%, rgba(20,184,166,0.16) 0%, transparent 60%)",
+    bgLight: "radial-gradient(ellipse at 80% 20%, rgba(20,184,166,0.08) 0%, transparent 60%)",
+  },
+  {
+    id: "radiant",
+    label: "Radiant",
+    color: "#f59e0b",
+    gradient: "linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)",
+    glow: "rgba(245,158,11,0.5)",
+    bgDark: "radial-gradient(ellipse at 50% 80%, rgba(245,158,11,0.16) 0%, transparent 60%)",
+    bgLight: "radial-gradient(ellipse at 50% 80%, rgba(245,158,11,0.08) 0%, transparent 60%)",
+  },
+  {
+    id: "dreamy",
+    label: "Dreamy",
+    color: "#ec4899",
+    gradient: "linear-gradient(135deg, #ec4899 0%, #f97316 100%)",
+    glow: "rgba(236,72,153,0.5)",
+    bgDark: "radial-gradient(ellipse at 30% 70%, rgba(236,72,153,0.16) 0%, transparent 60%)",
+    bgLight: "radial-gradient(ellipse at 30% 70%, rgba(236,72,153,0.08) 0%, transparent 60%)",
+  },
+  {
+    id: "electric",
+    label: "Electric",
+    color: "#8b5cf6",
+    gradient: "linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%)",
+    glow: "rgba(139,92,246,0.5)",
+    bgDark: "radial-gradient(ellipse at 70% 30%, rgba(139,92,246,0.18) 0%, transparent 60%)",
+    bgLight: "radial-gradient(ellipse at 70% 30%, rgba(139,92,246,0.08) 0%, transparent 60%)",
+  },
+  {
+    id: "melancholy",
+    label: "Melancholy",
+    color: "#64748b",
+    gradient: "linear-gradient(135deg, #64748b 0%, #475569 100%)",
+    glow: "rgba(100,116,139,0.5)",
+    bgDark: "radial-gradient(ellipse at 50% 50%, rgba(100,116,139,0.14) 0%, transparent 60%)",
+    bgLight: "radial-gradient(ellipse at 50% 50%, rgba(100,116,139,0.07) 0%, transparent 60%)",
+  },
+  {
+    id: "grounded",
+    label: "Grounded",
+    color: "#10b981",
+    gradient: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+    glow: "rgba(16,185,129,0.5)",
+    bgDark: "radial-gradient(ellipse at 60% 60%, rgba(16,185,129,0.16) 0%, transparent 60%)",
+    bgLight: "radial-gradient(ellipse at 60% 60%, rgba(16,185,129,0.08) 0%, transparent 60%)",
+  },
+];
+
+export const getMood = (id: MoodId): MoodPreset =>
+  MOOD_PRESETS.find((m) => m.id === id) ?? MOOD_PRESETS[0];
+
+export const DAILY_PROMPTS: string[] = [
+  "What made you feel most alive today?",
+  "Name one small thing you are grateful for right now.",
+  "What sound, smell, or texture defined today?",
+  "If today had a color, what would it be and why?",
+  "What did you learn about yourself today?",
+  "Who crossed your mind unexpectedly?",
+  "What would you tell yourself from this morning?",
+  "What is one thing you want to release before sleep?",
+  "Where did you feel the most peace today?",
+  "What made you pause and look twice?",
+  "If today was a song, what would the title be?",
+  "What are you looking forward to tomorrow?",
+  "Name a moment you wish you could bottle.",
+  "What did your body need today that you gave it?",
+  "What felt lighter today than it used to?",
+];
+
+export const SEED_VIBES: Vibe[] = [
+  {
+    id: "v1",
+    date: "2025-01-15",
+    mood: "cosmic",
+    note: "Lay on the hood of the car and counted satellites. The sky was so clear it felt like the universe was breathing right above me. Everything felt small and infinite at the same time.",
+    tags: ["#nightdrive", "#stargazing", "#solitude"],
+    auraColor: "#6366f1",
+    favorite: true,
+    music: { title: "Space Song", artist: "Beach House", moodTag: "dreamy" },
+    createdAt: 1736899200000,
+  },
+  {
+    id: "v2",
+    date: "2025-01-12",
+    mood: "serene",
+    note: "Early morning at the lake. No one else was there. Just the mist rising off the water and the sound of something small moving through the reeds. Felt like the world was holding its breath.",
+    tags: ["#nature", "#morning", "#peace"],
+    auraColor: "#14b8a6",
+    favorite: false,
+    music: { title: "An Ending (Ascent)", artist: "Brian Eno", moodTag: "ambient" },
+    createdAt: 1736640000000,
+  },
+  {
+    id: "v3",
+    date: "2025-01-08",
+    mood: "radiant",
+    note: "Golden hour hit the kitchen while making pasta. Flour on the counter, music on, no plans after. Everything was warm and ordinary and perfect. This is the life I wanted.",
+    tags: ["#goldenhour", "#home", "#cooking"],
+    auraColor: "#f59e0b",
+    favorite: true,
+    music: { title: "La Vie en Rose", artist: "Edith Piaf", moodTag: "warm" },
+    createdAt: 1736294400000,
+  },
+  {
+    id: "v4",
+    date: "2025-01-04",
+    mood: "dreamy",
+    note: "Got lost in a used bookstore for two hours. Found a poetry collection from 1974 with someone's notes in the margins. Felt like a conversation across time. Bought it immediately.",
+    tags: ["#books", "#wander", "#analog"],
+    auraColor: "#ec4899",
+    favorite: false,
+    createdAt: 1735948800000,
+  },
+  {
+    id: "v5",
+    date: "2024-12-28",
+    mood: "electric",
+    note: "Rooftop party in the cold. Breath visible in the neon light. Someone played a song I have been trying to remember for years. Danced until my legs gave out. Felt completely awake.",
+    tags: ["#friends", "#night", "#music"],
+    auraColor: "#8b5cf6",
+    favorite: true,
+    music: { title: "Midnight City", artist: "M83", moodTag: "electric" },
+    createdAt: 1735344000000,
+  },
+  {
+    id: "v6",
+    date: "2024-12-20",
+    mood: "melancholy",
+    note: "Rain on the window all day. Made tea and watched the street below. Not sad exactly. Just aware of how much time passes quietly. Thinking of someone I have not spoken to in a while.",
+    tags: ["#rain", "#reflection", "#home"],
+    auraColor: "#64748b",
+    favorite: false,
+    createdAt: 1734652800000,
+  },
+  {
+    id: "v7",
+    date: "2024-12-14",
+    mood: "grounded",
+    note: "Hiked up to the ridge before sunrise. Cold air, aching legs, the whole valley waking up below. Came back and ate eggs and toast like it was the best meal of the year.",
+    tags: ["#hiking", "#sunrise", "#simple"],
+    auraColor: "#10b981",
+    favorite: true,
+    createdAt: 1734134400000,
+  },
+];
+
+export const SEED_CAPSULES: Capsule[] = [
+  {
+    id: "c1",
+    title: "For the version of me that is struggling",
+    note: "If you are reading this, you made it through the hardest part. Remember the night on the rooftop when everything felt possible? That feeling was real. You are allowed to want it again. Be gentle with yourself today.",
+    mood: "dreamy",
+    tags: ["#selfcompassion", "#hope"],
+    lockedAt: 1735603200000,
+    unlockAt: 1751270400000,
+    unlocked: false,
+    createdAt: 1735603200000,
+  },
+  {
+    id: "c2",
+    title: "Things I want to remember about this winter",
+    note: "The way the light came through the kitchen window at 4pm. The specific cold of the morning hike. The sound of the bookstore bell. I want to remember that ordinary days can feel like gifts if you pay attention.",
+    mood: "serene",
+    tags: ["#winter", "#memory", "#gratitude"],
+    lockedAt: 1736121600000,
+    unlockAt: 1767168000000,
+    unlocked: false,
+    createdAt: 1736121600000,
+  },
+];
+
+export const SEED_REFLECTIONS: Reflection[] = [
+  {
+    id: "r1",
+    date: "2025-01-14",
+    prompt: "What made you feel most alive today?",
+    answer: "The cold air on my face during the evening walk. Something about the sharpness of it made me feel completely present. I noticed the way the streetlights made the frost glow on the grass.",
+    mood: "grounded",
+    createdAt: 1736812800000,
+  },
+  {
+    id: "r2",
+    date: "2025-01-10",
+    prompt: "Name one small thing you are grateful for right now.",
+    answer: "The way my coffee cup feels warm in both hands. It is such a small thing but today it felt like enough.",
+    mood: "radiant",
+    createdAt: 1736467200000,
+  },
+];
+
+export const DEFAULT_SETTINGS: AppSettings = {
+  theme: "dark",
+  onboarded: false,
+  activeMood: "cosmic",
+  streak: 2,
+  lastReflectionDate: "2025-01-14",
+};
+
+export const genId = () =>
+  Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
