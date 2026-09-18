@@ -412,8 +412,26 @@ const AuthScreen: React.FC = () => {
   const [isSignUp, setIsSignUp] = useState(true);
   const [message, setMessage] = useState("");
 
-  const handleAuth = async () => {
-    setMessage("");
+const handleResetPassword = async () => {
+  setMessage("");
+
+  if (!email) {
+    setMessage("Enter your email first.");
+    return;
+  }
+
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: "https://salmahayub20-blip.github.io/s-vibes/",
+  });
+
+  if (error) {
+    setMessage(error.message);
+  } else {
+    setMessage("Check your email for a password reset link.");
+  }
+};
+
+const handleAuth = async () => {
 
     if (!email || !password) {
       setMessage("Please enter your email and password.");
