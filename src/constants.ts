@@ -212,8 +212,8 @@ export const DEFAULT_SETTINGS: AppSettings = {
   theme: "dark",
   onboarded: false,
   activeMood: "cosmic",
-  streak: 2,
-  lastReflectionDate: "2025-01-14",
+  streak: 0,
+lastReflectionDate: undefined,
 };
 
 export const genId = () =>
