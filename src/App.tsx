@@ -408,10 +408,32 @@ const Shell: React.FC = () => {
 };
 
 /* ─── App ──────────────────────────────────────────────────────────── */
-const App: React.FC = () => (
-  <VibesProvider>
-    <Shell />
-  </VibesProvider>
-);
+const const App: React.FC = () => {
+  const [session, setSession] = useState<any>(null);
+
+  React.useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  if (!session) {
+    return <AuthScreen />;
+  }
+
+  return (
+    <VibesProvider>
+      <Shell />
+    </VibesProvider>
+  );
+};
 
 export default App;
