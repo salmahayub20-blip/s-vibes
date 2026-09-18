@@ -495,7 +495,14 @@ const AuthScreen: React.FC = () => {
           >
             {isSignUp ? "Create Account" : "Sign In"}
           </button>
-
+{!isSignUp && (
+  <button
+    onClick={handleResetPassword}
+    className="text-sm opacity-60"
+  >
+    Forgot password?
+  </button>
+)}
           <button
             onClick={() => {
               setIsSignUp(!isSignUp);
