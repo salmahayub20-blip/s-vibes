@@ -406,9 +406,120 @@ const Shell: React.FC = () => {
     </div>
   );
 };
+const AuthScreen: React.FC = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isSignUp, setIsSignUp] = useState(true);
+  const [message, setMessage] = useState("");
 
+  const handleAuth = async () => {
+    setMessage("");
+
+    if (!email || !password) {
+      setMessage("Please enter your email and password.");
+      return;
+    }
+
+    if (isSignUp) {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+
+      if (error) {
+        setMessage(error.message);
+      } else {
+        setMessage("Check your email to confirm your account.");
+      }
+    } else {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        setMessage(error.message);
+      }
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center p-6">
+      <div className="max-w-sm w-full text-center">
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          className="w-20 h-20 rounded-3xl mx-auto mb-6 flex items-center justify-center"
+          style={{
+            background: getMood("cosmic").gradient,
+            boxShadow: `0 16px 48px ${getMood("cosmic").glow}`,
+          }}
+        >
+          <Sparkle size={32} weight="fill" className="text-white" />
+        </motion.div>
+
+        <h1
+          className="text-2xl font-bold mb-2"
+          style={{ color: "#fff" }}
+        >
+          S.Vibes
+        </h1>
+
+        <p className="text-sm mb-6 opacity-60">
+          {isSignUp
+            ? "Create your private sanctuary."
+            : "Welcome back to your sanctuary."}
+        </p>
+
+        <div className="space-y-3">
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full px-4 py-3 rounded-2xl border bg-transparent text-sm"
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full px-4 py-3 rounded-2xl border bg-transparent text-sm"
+          />
+
+          <button
+            onClick={handleAuth}
+            className="w-full py-4 rounded-2xl text-white font-semibold text-sm"
+            style={{ background: getMood("cosmic").gradient }}
+          >
+            {isSignUp ? "Create Account" : "Sign In"}
+          </button>
+
+          <button
+            onClick={() => {
+              setIsSignUp(!isSignUp);
+              setMessage("");
+            }}
+            className="text-sm opacity-60"
+          >
+            {isSignUp
+              ? "Already have an account? Sign in"
+              : "Need an account? Sign up"}
+          </button>
+
+          {message && (
+            <p className="text-xs mt-3 opacity-70">
+              {message}
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
 /* ─── App ──────────────────────────────────────────────────────────── */
-const const App: React.FC = () => {
+const App: React.FC = () => {
   const [session, setSession] = useState<any>(null);
 
   React.useEffect(() => {
