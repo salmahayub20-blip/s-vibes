@@ -11,7 +11,8 @@ import dns from "node:dns";
 dns.setDefaultResultOrder("verbatim");
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig({ 
+  base: "/s-vibes/",
   plugins: [
     clearLogPlugin(),
     react(),
