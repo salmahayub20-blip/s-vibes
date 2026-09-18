@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkle, Heart, Flame, CalendarBlank, LockSimple, ArrowRight, Sun, Moon, Download, Trash, Check, BookOpen, Tag, MusicNote } from "@phosphor-icons/react";
 import { VibesProvider, useVibes } from "./context/VibesContext";
+import { supabase } from "./supabase";
 import { Navigation } from "./components/Navigation";
 import { VibeModal } from "./components/VibeModal";
 import { MoodGalaxy } from "./components/MoodGalaxy";
